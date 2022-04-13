@@ -210,3 +210,26 @@ HttpSession session = request.getSession();
 	
 	}
 ```
+
+### Cookie 옵션 설정 
+> - 쿠키를 불러올 때 url과 관련된 서블릿에게만 값이 전달될 수 있도록 하여 쿠키 이름 중복이나 여러 비효울 개선.
+
+---
+``` java
+			Cookie valuecookie = new Cookie("value", String.valueOf(v));
+			Cookie opcookie = new Cookie("op",op);
+			
+			//쿠키가 어느 경우에 사용자로부터 전달 되어야 하는지에 대한 경로 
+			// "/" 모든 페이지 요청할 때마다 쿠키를 가져와라
+			// "add/" add라는 uri를 요청해야만 쿠키가 전달됨.
+			// localhost:8080/add를 요청하면 쿠키가 전달됨.
+			
+			// "/notice/" notice안의 모든 경로를 요청하면 가능 
+			valuecookie.setPath("/calc2");
+			opcookie.setPath("/calc2");
+			//클라이언트에게 보내기
+			response.addCookie(valuecookie);
+			response.addCookie(opcookie);
+``` 
+
+
