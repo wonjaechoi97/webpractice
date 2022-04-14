@@ -247,17 +247,17 @@ HttpSession session = request.getSession();
 ```
 
 ### Application/Session/Cookie 정리
-## Application
+#### Application
 > - 사용 범위: 전역 범위에서 사용하는 저장 공간
 > - 생명주기: WAS가 시작해서 종료할 때 까지.
 > - 저장 위치 : WAS 서버의 메모리
 
-## Session
+#### Session
 > - 사용 범위: 특정 세션 범위에서 사용하는 저장 공간
 > - 생명주기: 세션이 시작해서 종료할 때 까지.
 > - 저장 위치 : WAS 서버의 메모리
 
-## Session
+#### Session
 > - 사용 범위: web 브라우저 별 지정한 path 범주 공간(특정 url을 요청할 시에만 쿠키를 가지고 간다.)
 > - 생명주기: 브라우저에 전달한 시간부터 만료시간 까지(maxAge로 설정)
 > - 저장 위치 : Web Browser의 메모리 또는 로컬의 파일.
