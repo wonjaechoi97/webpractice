@@ -231,5 +231,9 @@ HttpSession session = request.getSession();
 			response.addCookie(valuecookie);
 			response.addCookie(opcookie);
 ``` 
+> - maxAge 옵션 
+>	- maxAge를 따로 설정하지 않으면 쿠키의 생존주기는 브라우저의 생존주기와 같다.
+>	- 설정해주면 그 값을 유지 사용자 로컬 디렉토리에 저장되어 설정한 기간 만큼 유지한다. 
+>	
 
 
