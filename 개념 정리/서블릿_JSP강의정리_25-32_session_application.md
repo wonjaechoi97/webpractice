@@ -238,9 +238,9 @@ HttpSession session = request.getSession();
 > ### 사용법
  ```java
  // "/notice/" notice안의 모든 경로를 요청하면 가능 
-			valuecookie.setPath("/calc2");
+			valuecookie.setPath(request.getContextPath()+"/calc2");
 			valuecookie.setMaxAge(60*60*24);//초 단위 ==하루
-			opcookie.setPath("/calc2");
+			opcookie.setPath(request.getContextPath()+"/calc2");
 			//클라이언트에게 보내기
 			response.addCookie(valuecookie);
 			response.addCookie(opcookie);
