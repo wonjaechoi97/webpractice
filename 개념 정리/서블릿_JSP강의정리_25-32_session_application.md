@@ -235,7 +235,6 @@ HttpSession session = request.getSession();
 >	- maxAge를 따로 설정하지 않으면 쿠키의 생존주기는 브라우저의 생존주기와 같다.
 >	- 설정해주면 그 값을 유지 사용자 로컬 디렉토리에 저장되어 설정한 기간 만큼 유지한다. 
 > ![만료](https://user-images.githubusercontent.com/62707891/163419301-3252fa37-55ca-480c-9acb-19842127e208.png)
-
 > ### 사용법
  ```java
  // "/notice/" notice안의 모든 경로를 요청하면 가능 
@@ -246,6 +245,22 @@ HttpSession session = request.getSession();
 			response.addCookie(valuecookie);
 			response.addCookie(opcookie);
 ```
->
+
+### Application/Session/Cookie 정리
+## Application
+> - 사용 범위: 전역 범위에서 사용하는 저장 공간
+> - 생명주기: WAS가 시작해서 종료할 때 까지.
+> - 저장 위치 : WAS 서버의 메모리
+
+## Session
+> - 사용 범위: 특정 세션 범위에서 사용하는 저장 공간
+> - 생명주기: 세션이 시작해서 종료할 때 까지.
+> - 저장 위치 : WAS 서버의 메모리
+
+## Session
+> - 사용 범위: web 브라우저 별 지정한 path 범주 공간(특정 url을 요청할 시에만 쿠키를 가지고 간다.)
+> - 생명주기: 브라우저에 전달한 시간부터 만료시간 까지(maxAge로 설정)
+> - 저장 위치 : Web Browser의 메모리 또는 로컬의 파일.
+
 
 
