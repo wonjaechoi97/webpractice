@@ -10,3 +10,74 @@
 ## AOP 흐름
 ![프록시](https://user-images.githubusercontent.com/62707891/168421222-b32f3e2b-bd50-44bf-bf93-4232dd363af2.png)
 > - 위와 같이 proxy를 이용하여 cross-cutting concern을 수행하고 주 업무 로직을 수행하도록 하는 방법이다.
+
+## AOP 정리
+> ### 과거 사용자 관점 로직은 서비스 로직 코드 위 아래에 직접 붙이는 방법을 사용
+ ```java
+  @Override
+	public int total() {
+		long start = System.currentTimeMillis();
+		
+		
+		
+		//************주 로직****************
+		int result = kor+eng+math+com;
+		//*************************************
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		long end =System.currentTimeMillis();
+		
+		String message = (end-start)+"ms 시간이 걸렸습니다.";
+		System.out.println(message);
+		return result;
+	}
+  ```
+  > 주석을 경계로 서비스 로직과 개발자 관점 로직이 구분이 된다.
+  > ### 스프링의 도움 없이 프록시라는 도구를 사용하여 개발자 로직을 연결
+  ``` java
+  Exam exam = new NewlecExam(1,1,1,1);
+		// 파라미터 1.프록시로 만들려는 원래 서비스 로직을 담은 클래스 타입 2. 그 클래스가 상속 받은 인터페이스 배열로 여러개 가능
+	Exam proxy = (Exam)Proxy.newProxyInstance(NewlecExam.class.getClassLoader(), new Class[] {Exam.class}, 
+				// 개발자 관점 로직 구현 
+				new InvocationHandler() {
+					
+					@Override
+					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+						long start = System.currentTimeMillis();
+						//		           실제 서비스 로직, 넘겨 줘야할 파라미터 						
+						Object result = method.invoke(exam, args);
+						
+						
+						try {
+							Thread.sleep(200);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						long end =System.currentTimeMillis();
+						
+						String message = (end-start)+"ms 시간이 걸렸습니다.";
+						System.out.println(message);
+						return result;
+		
+				};
+			}
+		);
+				
+		// 각 메서드 마다 일일이 개발자 로직을 추가할 필요없다. avg, total 메서드 모두 같은 과정을 수행한다.
+		System.out.printf("total is %f \n",proxy.avg());
+		System.out.printf("total is %d \n",proxy.total());
+  ```
+> - 실행결과
+  ``` txt
+ 213ms 시간이 걸렸습니다.
+total is 1.000000 
+209ms 시간이 걸렸습니다.
+avg is 4 
+  ```
