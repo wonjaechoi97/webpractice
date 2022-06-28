@@ -13,7 +13,7 @@ public class MemoryMemberRepositoryTest {
 
     MemoryMemberRepository repository = new MemoryMemberRepository();
 
-    @AfterEach //메서드 하나 테스트 끝날 때 마다 메서드 실행 순서 보장 불가, 실행 순서에 따라 결과가 달라질 수 있음 
+    @AfterEach //메서드 하나 테스트 끝날 때 마다 메서드 실행 순서 보장 불가, 실행 순서에 따라 결과가 달라질 수 있음
     public void afterEach(){
         repository.clearStore(); //테스트 하나 실행될 때마다 repository clear!!s
     }
