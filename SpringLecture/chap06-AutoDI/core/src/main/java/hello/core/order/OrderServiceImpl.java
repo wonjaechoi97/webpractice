@@ -12,14 +12,47 @@ import org.springframework.stereotype.Component;
 @Component
 public class OrderServiceImpl implements OrderService{
 
+//    @Autowired 필드 주입 좋은 방식이 아니니 사용 지양하자
+    //순수 자바코드로 이 클래스 객체를 생성하면 discountPolicy 에 null값들어 있어서 사용 불가하므로 불가피하게 setter를 만들어줘야 한다.
     private final DiscountPolicy discountPolicy;
     private final MemberRepository memberRepository;
 
-    @Autowired
+    /*
+    final을 넣어주면 생성자할 때 아규먼트 넣어주지 않은 것을 컴파일 단계에서 확인 가능
+     */
+
+
+    //위의 final없애면 setMember...등으로 수정자 의존 주입 가능
+    //선택적으로 의존 관계 주입할 때는 set으로 하는 게 좋다 예)  memberRepository가 스프링 컨테이너에 없을 경우
+    //의존 주입 없어도 동작하게 하려면 @Autowired(required = false)필요
+
+//    @Autowired
+//    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+//        this.discountPolicy = discountPolicy;
+//    }
+//
+//    @Autowired
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+    /*
+    이렇게 수정자 di를하면 test코드 작성 시 그냥 실행은 되는데 NullPointerException 발생
+    생성자로 하면 컴파일 오류가 발생하므로 부족한 것이 무엇인지 한눈에 파악가능!
+     */
+
+
+        @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy ) {
         this.discountPolicy = discountPolicy;
         this.memberRepository = memberRepository;
     }
+
+    //일반 메서드 의존 주입 잘 사용하지 않음
+//    @Autowired
+//    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//        this.discountPolicy = discountPolicy;
+//        this.memberRepository = memberRepository;
+//    }
 
     /*
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();

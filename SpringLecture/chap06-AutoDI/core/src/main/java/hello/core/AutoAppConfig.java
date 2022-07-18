@@ -15,10 +15,9 @@ import org.springframework.context.annotation.FilterType;
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = Configuration.class) //configuration 제외
 )//자동으로 읽어서 bean 생성 @Component 붙은 클래스 자동으로 bean 등록
 public class AutoAppConfig {
-    @Bean(name="memoryMemberRepository")
+/*    @Bean(name="memoryMemberRepository")
     MemberRepository memberRepository(){
         System.out.println("수동 설정");
         return new MemoryMemberRepository();
-
-    }
+    }*/
 }
