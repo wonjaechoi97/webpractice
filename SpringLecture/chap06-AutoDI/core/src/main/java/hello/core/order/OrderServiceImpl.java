@@ -6,10 +6,12 @@ import hello.core.discount.RateDiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@RequiredArgsConstructor //final 붙은 필드 가지고 생성자 만듦
 public class OrderServiceImpl implements OrderService{
 
 //    @Autowired 필드 주입 좋은 방식이 아니니 사용 지양하자
@@ -22,7 +24,7 @@ public class OrderServiceImpl implements OrderService{
      */
 
 
-    //위의 final없애면 setMember...등으로 수정자 의존 주입 가능
+//위의 final없애면 setMember...등으로 수정자 의존 주입 가능
     //선택적으로 의존 관계 주입할 때는 set으로 하는 게 좋다 예)  memberRepository가 스프링 컨테이너에 없을 경우
     //의존 주입 없어도 동작하게 하려면 @Autowired(required = false)필요
 
@@ -41,11 +43,11 @@ public class OrderServiceImpl implements OrderService{
      */
 
 
-        @Autowired
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy ) {
-        this.discountPolicy = discountPolicy;
-        this.memberRepository = memberRepository;
-    }
+//    @Autowired // 생성자 하나면 생략 가능
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy ) {
+//        this.discountPolicy = discountPolicy;
+//        this.memberRepository = memberRepository;
+//    }
 
     //일반 메서드 의존 주입 잘 사용하지 않음
 //    @Autowired
