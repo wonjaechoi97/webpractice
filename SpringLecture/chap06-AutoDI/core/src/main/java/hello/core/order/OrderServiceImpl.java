@@ -16,8 +16,8 @@ public class OrderServiceImpl implements OrderService{
 
 //    @Autowired 필드 주입 좋은 방식이 아니니 사용 지양하자
     //순수 자바코드로 이 클래스 객체를 생성하면 discountPolicy 에 null값들어 있어서 사용 불가하므로 불가피하게 setter를 만들어줘야 한다.
-    private final DiscountPolicy discountPolicy;
     private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
 
     /*
     final을 넣어주면 생성자할 때 아규먼트 넣어주지 않은 것을 컴파일 단계에서 확인 가능
@@ -43,11 +43,7 @@ public class OrderServiceImpl implements OrderService{
      */
 
 
-//    @Autowired // 생성자 하나면 생략 가능
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy ) {
-//        this.discountPolicy = discountPolicy;
-//        this.memberRepository = memberRepository;
-//    }
+
 
     //일반 메서드 의존 주입 잘 사용하지 않음
 //    @Autowired
@@ -66,6 +62,13 @@ public class OrderServiceImpl implements OrderService{
     //인터페이스만 의존 그냥 실행하면 NullPointException 발생
     //누군가 대신 생성해서 주입해주어야 함 : 스프링!!
 
+
+//대체 가능!!
+//    @Autowired // 생성자 하나면 생략 가능
+//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy ) {
+//        this.discountPolicy = discountPolicy;
+//        this.memberRepository = memberRepository;
+//    }
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);

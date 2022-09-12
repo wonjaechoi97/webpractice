@@ -47,8 +47,8 @@ public class AppConfig {
     public OrderService orderService(){
 
         System.out.println("call AppConfig.orderService");
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());
-        return null;
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+//        return null;
     }
 
     @Bean //스프링 컨테이너에 등록
