@@ -8,10 +8,11 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor //final 붙은 필드 가지고 생성자 만듦
+//@RequiredArgsConstructor //final 붙은 필드 가지고 생성자 만듦
 public class OrderServiceImpl implements OrderService{
 
 //    @Autowired 필드 주입 좋은 방식이 아니니 사용 지양하자
@@ -64,11 +65,11 @@ public class OrderServiceImpl implements OrderService{
 
 
 //대체 가능!!
-//    @Autowired // 생성자 하나면 생략 가능
-//    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy ) {
-//        this.discountPolicy = discountPolicy;
-//        this.memberRepository = memberRepository;
-//    }
+    @Autowired // 생성자 하나면 생략 가능
+    public OrderServiceImpl(MemberRepository memberRepository, /*@Qualifier("mainDiscountPolicy") */DiscountPolicy discountPolicy ) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
