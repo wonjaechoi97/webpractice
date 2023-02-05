@@ -12,7 +12,7 @@ import hello.core.order.OrderServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+@Configuration //@Configuration 없으면 CGlib 즉 바이트 코드 조작을 통한 AppConfig@CGLib 생성 안한고 순수한 객체 생성
 public class AppConfig { //Application 전체를 설정하고 구성한다는 의미
     //사용 영역의 코드의 변경 없이
     // 구서 영역의 코드만 변경하여 확장가능하다.
