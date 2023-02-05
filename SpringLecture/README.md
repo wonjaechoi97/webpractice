@@ -9,3 +9,9 @@
 - [ ] chap 07 : 의존관계 자동 주입
 - [ ] chap 08 : 빈 생명주기 콜백
 - [ ] chap 09 : 빈 스코프
+
+## intelliJ 단축키 정리
+- Ctrl + shift + f(디렉토리 클릭후) => 찾기
+- alt + enter => 변수 자동생성, static import
+- ctrl + e => 최근 열어본 클래스
+
