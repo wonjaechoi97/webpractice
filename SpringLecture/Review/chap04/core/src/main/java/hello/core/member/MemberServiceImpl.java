@@ -1,5 +1,9 @@
 package hello.core.member;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component//("memberService2") : 이름 지정 가능
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository; //구현부까지 의존해서 문제다. ->이제 추상화에만 의존
@@ -7,6 +11,7 @@ public class MemberServiceImpl implements MemberService {
 
 
     //생성자 주입
+    @Autowired
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
