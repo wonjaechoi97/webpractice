@@ -20,10 +20,27 @@ public class OrderServiceImpl implements OrderService{
 
      */
     private final MemberRepository memberRepository;
-    private DiscountPolicy discountPolicy; // 인터페이스에만 의존한다.
+    private final DiscountPolicy discountPolicy; // 인터페이스에만 의존한다.
+
+    //setter 의존 관계 주입은 빈 생성 후 의존관계 주입 단계에서 주입된다.
+    /*
+    @Autowired
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        System.out.println("discountPolicy = " + discountPolicy);
+        this.discountPolicy = discountPolicy;
+    }
 
     @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+    */
+
+    //스프링이 빈 생성 시 의존관계 주입이 필요하면 그때 같이 주입한다.
+    @Autowired //생성자가 딱 1개 있을 때는 !!생략 가능
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
