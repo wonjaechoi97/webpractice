@@ -8,10 +8,11 @@ import hello.core.member.MemberRepository;
 import hello.core.member.MemoryMemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor // final 붙은 멤버 주입하는 생성자 만들어줌
+//@RequiredArgsConstructor // final 붙은 멤버 주입하는 생성자 만들어줌
 public class OrderServiceImpl implements OrderService{
 
     //private final MemberRepository memberRepository= new MemoryMemberRepository();
@@ -40,11 +41,11 @@ public class OrderServiceImpl implements OrderService{
 
     //스프링이 빈 생성 시 의존관계 주입이 필요하면 그때 같이 주입한다.
     //@Autowired //생성자가 딱 1개 있을 때는 !!생략 가능
-    /*public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository,  DiscountPolicy discountPolicy) {
         System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
-    }*/ // <--------롬복으로 대체
+    } // <--------롬복으로 대체
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
         Member member = memberRepository.findById(memberId);
