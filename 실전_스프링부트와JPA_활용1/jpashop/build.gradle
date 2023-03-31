@@ -24,6 +24,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-devtools'
+	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.9.0")
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'com.h2database:h2'
 	//다운받는 h2 db 버전이랑 클라이언트 버전이랑 안 맞으면 충돌 될수도 맞춰주자
