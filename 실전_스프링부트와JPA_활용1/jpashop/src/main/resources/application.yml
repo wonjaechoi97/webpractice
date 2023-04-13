@@ -17,4 +17,4 @@ spring:
 logging:
   level:
     org.hibernate.SQL: debug #하이버네이트 sql로그를 디버그 모드로 사용
-    org.hibernate.type: trace
+    org.hibernate.type:  trace
