@@ -21,21 +21,48 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id") //외래키 이름 member_id
     private Member member;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL) //
     private List<OrderItem> orderItems = new ArrayList<>();
 
-    @OneToOne //주로 Order 를 통해서 Delivery를 보기 때문에 order에 외래키를 둔다 **연관관계 주인**
+    /*
+    persist(orderItemA)
+    persist(orderItemB)
+    persist(orderItemC)
+    persist(order)
+    ------------- cascade = CascadeType.ALL
+    persist(order) 간편해짐
+     */
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL) //주로 Order 를 통해서 Delivery를 보기 때문에 order에 외래키를 둔다 **연관관계 주인**
     @JoinColumn(name = "delivery_id")
     private Delivery delivery;
+
+    // Order persist 하면 delivery도 persist 가능
 
     private LocalDateTime orderDate; //주문 시간 : 시간 분까지
 
     @Enumerated(EnumType.STRING)
     private OrderStatus status; //주문상태 : {ORDER, CANCEL}
+
+    //연관관계 편의 메서드(양방향 연관관계이면 편함)
+    public void setMember(Member member){
+        this.member = member;
+        member.getOrders().add(this);
+    }
+
+    public void addOrderItem(OrderItem orderItem){
+        orderItems.add(orderItem);
+        orderItem.setOrder(this);
+    }
+
+    public void setDelivery(Delivery delivery){
+        this.delivery = delivery;
+        delivery.setOrder(this);
+    }
 
 
 }
