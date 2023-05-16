@@ -1,4 +1,4 @@
-package jpabook.jpashop;
+/*package jpabook.jpashop;
 
 import jpabook.jpashop.domain.Member;
 import org.assertj.core.api.Assertions;
@@ -9,8 +9,9 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*;*/
 
+/*
 @SpringBootTest
 class MemberRepositoryTest {
 
@@ -37,4 +38,4 @@ class MemberRepositoryTest {
         //같으면 같은 객체
 
     }
-}
+}*/

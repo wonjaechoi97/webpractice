@@ -71,7 +71,7 @@ public class MemberService {
 
     //회원 전체 조회
 //    @Transactional(readOnly = true) // jpa 조회 하는 경우 성능 최적화
-    private List<Member> findMembers() {
+    public List<Member> findMembers() {
         return memberRepository.findAll();
     }
 
