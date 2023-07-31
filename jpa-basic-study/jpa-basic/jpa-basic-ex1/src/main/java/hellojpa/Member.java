@@ -2,8 +2,10 @@ package hellojpa;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Entity
+@Entity //jpa 가 로딩시 jpa 사용하는 것을 인식
+//@Table(name = "USER")
 public class Member {
     @Id
     private  Long id;
