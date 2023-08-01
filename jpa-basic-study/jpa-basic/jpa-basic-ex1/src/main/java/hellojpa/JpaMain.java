@@ -33,12 +33,25 @@ public class JpaMain {
             em.remove(findMember);*/
 
             //수정
-            Member findMember = em.find(Member.class, 1L);
-            findMember.setName("HelloJPA");
+            /*Member findMember = em.find(Member.class, 1L);
+            findMember.setName("HelloJPA");*/
             //굳이 em.persist() 안해줘도 자동으로 업데이트 쿼리 나가고 커밋된다.
 //            em.persist(member);
 
-            tx.commit(); //자원을 다 쓰면 반환
+//            tx.commit(); //자원을 다 쓰면 반환
+            //비영속
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("HelloJPA");
+
+            //영속 -> 엔티티 매니저 안 영속성 컨텍스 틍해서 관리가 된다.
+            em.persist(member); //쿼리 날아가지 않음
+
+            em.detach(member); //회원 엔티티를 영속성 컨텍스트에서 분리, 준영속 상태
+
+            em.remove(member); //객체 삭제한 상태(삭제 상태)
+
+            tx.commit(); //트랜잭션을 커밋하는 시점에 쿼리 날아감
         }catch (Exception e){
             tx.rollback();//예외 발생 시 롤백시켜주기
         }finally {
