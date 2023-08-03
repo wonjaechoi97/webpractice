@@ -40,7 +40,7 @@ public class JpaMain {
 
 //            tx.commit(); //자원을 다 쓰면 반환
             //비영속
-            Member member = new Member();
+            /*Member member = new Member();
             member.setId(100L);
             member.setName("HelloJPA");
 
@@ -51,7 +51,21 @@ public class JpaMain {
 
             em.remove(member); //객체 삭제한 상태(삭제 상태)
 
-            tx.commit(); //트랜잭션을 커밋하는 시점에 쿼리 날아감
+            tx.commit(); //트랜잭션을 커밋하는 시점에 쿼리 날아감*/
+
+
+            //영속
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+
+            // 영속성 컨텍스트 1차 캐시에 저장 쿼리도 아직 날리지 않고 저장
+            em.persist(member1);
+            em.persist(member2);
+            System.out.println("====================="); // <== 이 이후 커밋할때 쿼리 날린다.
+            //버퍼링 쿼리 한번에 모았다가 날림
+
+            tx.commit();
+
         }catch (Exception e){
             tx.rollback();//예외 발생 시 롤백시켜주기
         }finally {
