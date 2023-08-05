@@ -16,10 +16,21 @@ public class DirtyCheckingMain {
         tx.begin();
 //아래 try catch는 정석 코드이나 스프링이 다 해준다.
         try {
-            Member member = em.find(Member.class, 150L);
-            member.setName("ZZZZZ");
+            /*Member member = em.find(Member.class, 150L);
+            member.setName("ZZZZZ");*/
             //em.persist하지 않아도 스냅샷과의 비교를 통해 변경을 감지해서 알아서 커밋에서 쿼리를 날려준다
             //자바 컬렉션을 생각해보자, 변경했다고 해서 컬렉션에 다시 넣어주는 과정이 필요한가?
+
+            //플러시 테스트
+            /*
+            기본적으로 커밋하거나 쿼리 실행시 플러시된다.
+             */
+            Member member = new Member(200L, "member200");
+            em.persist(member);
+
+            em.flush();
+
+            System.out.println("===========================");
 
 
             tx.commit();
