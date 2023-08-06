@@ -25,10 +25,26 @@ public class DirtyCheckingMain {
             /*
             기본적으로 커밋하거나 쿼리 실행시 플러시된다.
              */
-            Member member = new Member(200L, "member200");
-            em.persist(member);
+            /*  Member member = new Member(200L, "member200");
+                em.persist(member);
 
-            em.flush();
+                em.flush();*/
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAA");
+
+            // 준영속 상태 만들기
+            /*
+            영속성 컨텍스트에서 관리하지 않으므로 변경사항 있어도 쿼리 날리지 않음
+             */
+            em.detach(member);
+            /*
+            em.clear(); //영속성 컨텍스트 통으로 초기화
+
+            Member member2 = em.find(Member.class, 150L); //영속성 컨텍스트가 없기 때문에 새롭게 영속성 컨텍스트 올림
+            //즉 쿼리를 한 번 더 날림 : 영속성 컨텍스트 초기화하지 않았다면 1차 캐시에서 바로 가져올 수 있다.
+
+             */
+
 
             System.out.println("===========================");
 
