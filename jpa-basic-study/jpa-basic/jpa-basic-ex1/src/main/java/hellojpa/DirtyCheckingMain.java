@@ -30,7 +30,7 @@ public class DirtyCheckingMain {
 
                 em.flush();*/
             Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
+            member.setUsername("AAAAA");
 
             // 준영속 상태 만들기
             /*
