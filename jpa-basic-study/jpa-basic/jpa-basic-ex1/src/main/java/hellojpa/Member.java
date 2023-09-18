@@ -9,6 +9,7 @@ import java.util.Date;
 //@Table(name = "USER") <-- 테이블 명으로 매핑
 public class Member {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO) // Auto = DB 방언에 맞춰서
     private Long id;
     @Column(name = "name") // db 컬럼명
     private String username;
